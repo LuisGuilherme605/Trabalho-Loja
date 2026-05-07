@@ -1,0 +1,65 @@
+Código do estoque da loja 
+
+estoque = []
+
+while True:
+    print("\n Loja de bicicleta")
+    print("1 - Cadastrar produto") 
+    print("2 - Mostrar estoque")
+    print("3 - Vender produto")
+    print("0 - Sair")
+
+    opcao = input("Escolha uma opção: ")
+
+    if opcao == "1":
+        codigo = input("Código do produto: ")
+        nome = input("Nome do produto: ")
+        preco = float(input("Preço: "))
+        quantidade = int(input("Quantidade: "))
+
+        produto = {
+            "codigo": codigo,
+            "nome": nome,
+            "preco": preco,
+            "quantidade": quantidade
+        }
+
+        estoque.append(produto)
+        print(" Produto cadastrado com sucesso!")
+
+    elif opcao == "2":
+        if len(estoque) == 0:
+            print("Estoque vazio.")
+        else:
+            for p in estoque:
+                print(
+                    "Código:", p["codigo"],
+                    "| Nome:", p["nome"],
+                    "| Preço: R$", p["preco"],
+                    "| Quantidade:", p["quantidade"]
+                )
+
+    elif opcao == "3":
+        codigo_venda = input("Código do produto: ")
+        quantidade_venda = int(input("Quantidade vendida: "))
+
+        encontrado = False
+
+        for p in estoque:
+            if p["codigo"] == codigo_venda:
+                encontrado = True
+                if p["quantidade"] >= quantidade_venda:
+                    p["quantidade"] -= quantidade_venda
+                    print(" Venda realizada!")
+                else:
+                    print("Quantidade insuficiente em estoque.")
+
+        if not encontrado:
+            print(" Produto não encontrado.")
+
+    elif opcao == "0":
+        print("Saindo do sistema...")
+        break
+
+    else:
+        print("Opção inválida.")
